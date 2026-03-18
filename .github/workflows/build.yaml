@@ -1,0 +1,37 @@
+name: README build
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 4 * * *"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+      - name: Setup go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: 'go.mod'
+          cache-dependency-path: 'go.sum'
+      - name: Install dependencies
+        run: go get .
+      - name: Update README file
+        run: go run update-readme.go
+      - name: Commit changes
+        run: |-
+          git add .
+          git diff
+
+      # - name: Commit
+      #   run: |-
+      #     git add .
+      #     git diff
+      #     git config --global user.email "github-actions-bot@andrew6rant.github.io"
+      #     git config --global user.name "Andrew6rant/GitHub-Actions-Bot"
+      #     git commit -m "Updated README" -a || echo "No changes to commit"
+      #     git push
