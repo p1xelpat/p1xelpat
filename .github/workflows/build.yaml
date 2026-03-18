@@ -23,6 +23,8 @@ jobs:
       - name: Update README file
         run: go run update-readme.go
       - name: Commit changes
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |-
           git add .
           git diff
