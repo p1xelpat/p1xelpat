@@ -26,12 +26,7 @@ jobs:
         run: |-
           git add .
           git diff
-
-      # - name: Commit
-      #   run: |-
-      #     git add .
-      #     git diff
-      #     git config --global user.email "github-actions-bot@andrew6rant.github.io"
-      #     git config --global user.name "Andrew6rant/GitHub-Actions-Bot"
-      #     git commit -m "Updated README" -a || echo "No changes to commit"
-      #     git push
+          git config --global user.email "github-actions-bot@p1xelpat.github.io"
+          git config --global user.name "p1xelpat/GitHub-Actions-Bot"
+          git commit -m "Updated README" -a || echo "No changes to commit"
+          git push
