@@ -5,6 +5,11 @@ on:
       - main
   schedule:
     - cron: "0 4 * * *"
+
+# Grant write permissions to the GITHUB_TOKEN so the job is able to push code changes
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,8 +28,6 @@ jobs:
       - name: Update README file
         run: go run update-readme.go
       - name: Commit changes
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |-
           git add .
           git diff
